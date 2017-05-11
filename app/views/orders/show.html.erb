@@ -2,6 +2,12 @@
 
   <header class="page-header">
     <h1>Order #<%= @order.id %></h1>
+    <h2>E-mail <%= @order.email %></h2>
+    <h3>CAD $<%= @order.total %></h3>
+    <h3>Line Item <%= @order.line_items.product %></h3>
+
+
+
   </header>
 
   <div class="order-summary jumbotron">
