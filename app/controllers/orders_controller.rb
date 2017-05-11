@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
       total_cents: cart_total,
       stripe_charge_id: stripe_charge.id, # returned by stripe
     )
-    cart.each do |product_id, details|
+    cart.each do |order_id, details|
       if product = Product.find_by(id: product_id)
         quantity = details['quantity'].to_i
         order.line_items.new(
@@ -55,8 +55,10 @@ class OrdersController < ApplicationController
     order.save!
     order
   end
-
+#Datestamp as unqiue id, have to change params of things, like maybe order? 
   # returns total in cents not dollars (stripe uses cents as well)
+  # #precompile, take all the webpacks files for production, stick em into a folder then its served
+  # #in right structure, react will dump final folders 
   def cart_total
     total = 0
     cart.each do |product_id, details|

@@ -4,10 +4,42 @@
     <h1>Order #<%= @order.id %></h1>
     <h2>E-mail <%= @order.email %></h2>
     <h3>CAD $<%= @order.total %></h3>
-    <h3>Line Item <%= @order.line_items.product %></h3>
+<table class="table table-bordered">
+   <tr>
+          <th>Item</th>
+          <th>Product</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Quanity</th>
+          <th>Total</th>    
+        </tr>
+      </thead>
+   <tbody>
+        <% @order.line_items.each do |line_item| %>
+        <tr><td>
+            <%=line_item.product.name %>
+        </td>
+        <td>
+            <%=image_tag line_item.product.image.tiny %>
+        </td>
+        <td>
+            <%=line_item.product.description %>
+        </td>
+            <td>
+            <%= line_item.item_price  %>
+        </td>
+        <td>
+            <%=line_item.quantity %>
+        </td>
+        <td>
+            <%= line_item.item_price * line_item.quantity %>
+        </td>
 
-
-
+         </tr>
+         
+        <% end %>
+      </tbody>
+</table>
   </header>
 
   <div class="order-summary jumbotron">
