@@ -1,7 +1,16 @@
 class CartsController < ApplicationController
 
+#   def show
+#     if empty_cart!
+#   end
+
+    if @empty_cart
+   redirect_to request.referer
+else
   def show
-  end
+end
+end
+
 
   def add_item
     product_id = params[:product_id].to_s

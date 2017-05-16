@@ -7,11 +7,9 @@
   <article class="product-detail">
 
     <div class="row">
-
       <div class="col-sm-4">
         <%= image_tag @product.image.url, class: 'main-img' %>
       </div>
-
       <div class="col-sm-8">
         <dl class="dl-horizontal">
           <dt>Name</dt> 
@@ -22,10 +20,41 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
-        </dl>
       </div>
+</article>
+  <table class="table table-bordered">
+      <tr> 
+        <th>User</th>
+        <th>Review</th>
+        <th>Stars</th>
+      </tr> 
+    <% @product.reviews.each do |review|%>
+       <% if session[:user_id] == review.user_id %>
+       <tr> 
+     <td><%=review.user_id%></td>
+     <td><%=review.description%></td>
+     <td><%=review.rating%></td>
+    <td><%= link_to fa_icon('trash'), product_review_path(@product, review), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+    <% else %>
+      <tr>
+     <td><%=review.user_id%></td>
+     <td><%=review.description%></td>
+     <td><%=review.rating%></td>
+      <% end %>
+      <% end %>
+      </tr>
+  </table>
+  <% if session[:user_id].nil? %>
+  <%= link_to 'Login', '/login' %> To review
+  <% else %>
+      <div class="review">
+    <%= form_for ([@product, @product.reviews.new]) do |f| %>
+    <%= f.text_area :description %>
+    <%= f.select :rating, [['5','5'],['4','4'],['3','3'],['2','2'],['1','1']] %>
+    <%= f.hidden_field :product_id %>
+    <%= f.submit %>
+    <% end %>
+    <% end %>
     </div>
-
-  </article>
 
 </section>

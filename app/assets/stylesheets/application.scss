@@ -10,3 +10,31 @@
 body {
   padding-top: 70px;
 }
+
+.review {
+    background-color: #eef;
+    opacity: 0.6;
+    margin: auto;
+    width: 60%;
+    padding: 2px;
+
+    textarea{
+        margin: auto;
+        width: 90%;
+      }
+      select{
+        margin: auto;
+        width: 44%;
+      }
+      input{
+        margin: auto;
+        width: 44%;
+
+      }
+
+}
+
+
+.navbar-btn{
+    
+}
